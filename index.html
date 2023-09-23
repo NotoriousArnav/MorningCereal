@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: 'Ubuntu Mono', monospace;
+        }
+        #text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: clip;
+        }
+    </style>
+</head>
+
+<body class="dark dark:bg-zinc-900">
+    <section class="p-5 m-6 items-center justify-center">
+        <div id="text" onmousemove="textFill(event)" class="text-2xl"></div>
+    </section>
+    <script>
+        string = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890!@#$%^&*()-=+_`~[];";
+        function randSelect(objc) {
+            idx = Math.round(Math.random() * objc.length)
+            return objc[idx]
+        }
+
+        function randColor () {
+            level = 500
+            colors = [
+                'red',
+                'orange',
+                'amber',
+                'lime',
+                'teal',
+                'blue',
+                'rose',
+                'white'
+            ]
+            color = `-${randSelect(colors)}-${level}`
+            return color
+        }
+
+
+        function randText(return_lenght) {
+            res = ""
+            for (i = 0; i < return_lenght; i++) {
+                x = randSelect(string)
+                if (x == undefined) {
+                    x = 0
+                }
+                // console.log(x)
+                res = res + `<span class="text${randColor()}">${x}</span>`
+            }
+            return res
+        }
+        text = document.getElementById('text')
+        function textFill (event) {
+            text.innerHTML = '';
+            cells = 20
+            for (let i = 0; i < cells; i++) {
+                text.innerHTML += `${randText(120)}<br>`
+            }
+        }
+        textFill()
+    </script>
+</body>
+
+</html>
